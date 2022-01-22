@@ -6,7 +6,9 @@ var bot = linebot({
   channelAccessToken: '6AcSOYuoJpyOoD7W3c5DxMTR8qmA69lveDOiJlvqghgSrO3X4uz7y/+h+YpFkWbcJt/gg2LDzG9tJtBwlZow6Inyc+nIDT1768GdV7MAXkMeOLdPLw3DdPuJic3uU18BZPYvt6wAjyt7btFOl61QygdB04t89/1O/w1cDnyilFU=',
 
 });
-
+bot.listen('/test', 3000, function () {
+  console.log('[BOT已準備就緒]');
+});
 bot.on('message', function (event) {
   event.reply(event.message.text).then(function (data) {
     // success
