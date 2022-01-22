@@ -19,5 +19,3 @@ bot.on('message', function (event) {
     // error
   });
 });
-
-bot.listen('/linewebhook', 3000);
