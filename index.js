@@ -22,19 +22,43 @@ app.post('/callback', line.middleware(config), (req, res) => {
       res.status(500).end();
     });
 });
-
+let dataArray=['','','','','','','','','','','','','','','']
 // event handler
 function handleEvent(event) {
+  let echo=null
   if (event.type !== 'message' || event.message.type !== 'text') {
     // ignore non-text-message event
     return Promise.resolve(null);
   }
-
+  else{
+    
+    if(event.message.text=='開始回報'){
+      dataArray=['','','','','','','','','','','','','','','']
+      echo = { type: 'text', text: '請各位弟兄現在開始回報' }
+      return client.replyMessage(event.replyToken, echo);
+    }else if(event.message.text=='查詢詳情'){
+      console.log(dataArray)
+      let unSignList=''
+      let signList=''
+      for(let i =0;i<dataArray.length;i++){
+        if(dataArray[i]==''){
+          unSignList+=`${i+31}未回報\n`
+        }else{
+          signList+=`${dataArray[i]}\n`
+        }
+      }
+      echo = { type: 'text', text: signList+unSignList }
+      return client.replyMessage(event.replyToken, echo);
+      //  echo = { type: 'text', text: dataArray }
+      //  return client.replyMessage(event.replyToken, echo);
+    }else{
+      let id=event.message.text.substr(0,2)
+      dataArray[id-31]=event.message.text
+    }
+  }
   // create a echoing text message
-  const echo = { type: 'text', text: event.message.text };
-
   // use reply API
-  return client.replyMessage(event.replyToken, echo);
+  
 }
 
 // listen on port
