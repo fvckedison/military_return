@@ -42,9 +42,9 @@ function handleEvent(event) {
       let signList=''
       for(let i =0;i<dataArray.length;i++){
         if(dataArray[i]==''){
-          unSignList+=`120${i+31}未回報\n`
+          unSignList+=`120${i+31}未回報\n\n`
         }else{
-          signList+=`${dataArray[i]}\n`
+          signList+=`${dataArray[i]}\n\n`
         }
       }
       echo = { type: 'text', text: signList+unSignList }
