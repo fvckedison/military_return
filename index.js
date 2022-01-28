@@ -51,8 +51,8 @@ function handleEvent(event) {
       return client.replyMessage(event.replyToken, echo);
       //  echo = { type: 'text', text: dataArray }
       //  return client.replyMessage(event.replyToken, echo);
-    }else{
-      let id=event.message.text.substr(0,2)
+    }else if (parseInt(event.message.text.substr(3,2),10)>30 &&parseInt(event.message.text.substr(3,2),10)<46){
+      let id=parseInt(event.message.text.substr(3,2),10)
       dataArray[id-31]=event.message.text
     }
   }
