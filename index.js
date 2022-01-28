@@ -34,7 +34,7 @@ function handleEvent(event) {
     
     if(event.message.text=='開始回報'){
       dataArray=['','','','','','','','','','','','','','','']
-      echo = { type: 'text', text: '請各位弟兄現在開始回報' }
+      echo = { type: 'text', text: '請各位弟兄現在開始回報\n請複製以下格式\n\n120001 陳威助\n在哪：家\n做什麼：玩手機\n有無飲酒：無\n2200後是否在家不出門：是\n' }
       return client.replyMessage(event.replyToken, echo);
     }else if(event.message.text=='查詢詳情'){
       console.log(dataArray)
@@ -42,7 +42,7 @@ function handleEvent(event) {
       let signList=''
       for(let i =0;i<dataArray.length;i++){
         if(dataArray[i]==''){
-          unSignList+=`${i+31}未回報\n`
+          unSignList+=`120${i+31}未回報\n`
         }else{
           signList+=`${dataArray[i]}\n`
         }
