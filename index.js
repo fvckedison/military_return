@@ -34,6 +34,12 @@ function handleEvent(event) {
   else {
     if (event.message.text == '開始回報') {
       echo = { type: 'text', text: '請各位弟兄現在開始回報\n請複製以下格式\n\n12001 陳威助\n在哪：家\n做什麼：玩手機\n有無飲酒：無\n2200後是否在家不出門：是\n' }
+      let result = db.get('returnMessage').orderBy('id:', 'asc').value()
+      result.forEach(element => {
+        db.get('returnMessage')
+        .remove({ id: element.id })
+        .write();
+      });
       return client.replyMessage(event.replyToken, echo);
     } else if (event.message.text == '查詢詳情') {
       let result = db.get('returnMessage').orderBy('id:', 'asc').value()
@@ -50,8 +56,6 @@ function handleEvent(event) {
         echo = { type: 'text', text: '尚未有人回報' }
         return client.replyMessage(event.replyToken, echo);
       }
-      
-      
     } else if (parseInt(event.message.text.substr(0, 5), 10) != NaN && parseInt(event.message.text.substr(0, 5), 10) > 10000&& parseInt(event.message.text.substr(0, 5), 10) < 99999) {
       let id = parseInt(event.message.text.substr(0, 5), 10)
       let result = db.get('returnMessage')
